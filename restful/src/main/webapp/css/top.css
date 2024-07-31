@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: linear-gradient(135deg, #b76e79, #e2b7bc); /* 로즈골드 그라데이션 */
+    height: 90px;
+    line-height: 90px;
+    color: #2196F3; /* 파란색 글자 */
+    font-size: 30px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 강한 그림자 */
+    border-bottom: 2px solid #e8c0c7; /* 하단 경계선 */
+}
+
+nav {
+    background: linear-gradient(135deg, #d0a1a5, #f6e0e3); /* 로즈골드 느낌의 색상 */
+    height: 40px;
+    line-height: 40px;
+    color: #2196F3; /* 파란색 글자 */
+    font-size: 16px;
+    text-align: left;
+    padding: 0 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+}
+
+nav a {
+    color: #2196F3; /* 파란색 링크 */
+    margin: 0 15px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #1976D2; /* 호버 시 더 어두운 파란색으로 변화 */
+}
+
+section {
+    background: #f9e6e7; /* 밝은 로즈골드 배경 */
+    min-height: 450px;
+    line-height: 40px;
+    font-size: 14px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+    text-align: center;
+    color: #2196F3; /* 파란색 글자 */
+}
+
+.image-container {
+    margin: 20px auto;
+}
+
+.image-container img {
+    max-width: 100%; /* 반응형 이미지 */
+    height: auto;    /* 비율 유지 */
+    border-radius: 8px; /* 이미지 모서리 둥글게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 이미지에 입체감 있는 그림자 추가 */
+}
+
+footer {
+    background: linear-gradient(135deg, #b76e79, #e2b7bc); /* 헤더와 동일한 로즈골드 그라데이션 */
+    height: 40px;
+    line-height: 40px;
+    color: #2196F3; /* 파란색 글자 */
+    font-size: 16px;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 */
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.guest.GDao">
+
+<select id="list" parameterType="com.test.guest.GVo" 
+        resultType ="com.test.guest.GVo" >
+  select rownum  , K.* 
+  from
+    (  select rownum as rnum , P.* 
+       from
+          (select * from guestbook 
+              where 1=1
+              <if test="ch1=='name'">
+                   and name like  #{ch2} 
+              </if>
+              <if test="ch1=='memo'">
+               and memo like like  #{ch2} 
+              </if>
+                        
+              order  by idx ) P
+      <![CDATA[
+       where ROWNUM <= #{start} + #{pageSize} -1      
+     ) K 
+ where rnum >=#{start}
+ ]]>
+</select>
+
+<select id="totalCount" parameterType="com.test.guest.GVo" 
+        resultType ="int" >
+  select count(*) from  guestbook
+     where 1=1
+     <if test="ch1=='name'">
+          and name like '%' || #{ch2} || '%'
+     </if>
+     <if test="ch1=='memo'">
+      and memo like like '%' || #{ch2} || '%'
+     </if>
+</select>
+
+<select id="edit" parameterType="com.test.guest.GVo" 
+        resultType ="com.test.guest.GVo" >
+  select idx, name, memo, age, regdate from guestbook 
+  where idx = #{idx}
+</select>
+
+<insert id="insert" parameterType="com.test.guest.GVo">
+insert  into  guestbook (idx, name, memo, age)
+values(idx.nextval, #{name}, #{memo}, #{age})
+</insert>
+
+<delete id="delete" parameterType="com.test.guest.GVo">
+delete from guestbook where idx = #{idx}
+</delete>
+
+<update id="update" parameterType="com.test.guest.GVo">
+update guestbook set name=#{name}, memo=#{memo}, age=#{age} where idx=#{idx}
+</update>
+
+</mapper>

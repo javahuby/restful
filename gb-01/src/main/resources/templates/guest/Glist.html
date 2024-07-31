@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>방명록보기</title>
+    <style>
+        body {
+            background-color: #f5f5f5; /* 연한 회색 배경 */
+            font-family: Arial, sans-serif;
+            color: #000000; /* 기본 글자 색상 검은색 */
+            margin: 0;
+            padding: 0;
+        }
+
+        .member-table {
+            background: #ffffff; /* 흰색 배경 */
+            border: 1px solid #dddddd; /* 연한 회색 테두리 */
+            border-radius: 4px; /* 약간 둥근 테두리 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+            width: 800px;
+            margin: 20px auto; /* 중앙 정렬 및 위아래 마진 추가 */
+            border-collapse: collapse; /* 셀 간의 경계선 제거 */
+        }
+
+        .member-table th, .member-table td {
+            padding: 10px; /* 패딩 */
+            text-align: left; /* 왼쪽 정렬 */
+            color: #000000; /* 검은색 글자 */
+        }
+
+        .member-table th {
+            background-color: #f0f0f0; /* 연한 회색 배경 */
+            border-bottom: 2px solid #dddddd; /* 아래 경계선 */
+            font-weight: bold; /* 굵은 글자 */
+        }
+
+        .member-table td {
+            border-bottom: 1px solid #dddddd; /* 연한 회색 테두리 아래 경계선 */
+        }
+
+        .member-table tr:nth-child(even) {
+            background-color: #f9f9f9; /* 연한 회색 배경 */
+        }
+
+        .member-table tr:hover {
+            background-color: #e0e0e0; /* 더 진한 회색 배경 */
+        }
+
+        a {
+            color: #000000; /* 검은색 링크 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        a:hover {
+            text-decoration: underline; /* 호버 시 밑줄 추가 */
+            color: #333333; /* 호버 시 링크 색상 변경 */
+        }
+
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 4px;
+            border-radius: 4px;
+            color: #000000; /* 검은색 글자 */
+            background-color: #ffffff; /* 흰색 배경 */
+            font-size: 16px;
+            text-decoration: none; /* 밑줄 제거 */
+            border: 1px solid #dddddd; /* 연한 회색 테두리 */
+        }
+
+        .pagination .current-page {
+            background-color: #000000; /* 검은색 배경 */
+            color: #ffffff; /* 흰색 글자 */
+            font-weight: bold; /* 강조 글자 굵기 */
+        }
+    </style>
+</head>
+
+<body>
+<div  th:replace="~{include/top}"></div>
+<section>
+<br>
+
+<div align="center">
+1. 페이지 사이즈 : [[${pageSize}]] &emsp;
+2. 페이지 list 사이즈 : [[${pageListSize}]] &emsp;
+3. 전체 레코드 수 : [[${totalCount}]] &emsp;
+4. 총 페이지 수 : [[${totalPage}]] <br>
+5. 현재 레코드 : [[${start}]] &emsp;
+6. 현재 페이지 : [[${currentPage}]] &emsp;
+7. 하단 가로 시작 :[[${listStartPage}]] &emsp;
+8. 하단 가로 끝 : [[${listEndPage}]] &emsp;
+9. 마지막 페이지 : [[${lastPage}]] <br>
+</div>
+
+  <div align="center"><h2> 방명록보기 </h2></div> 
+  <div align="center"> 
+  
+  
+  <table Class="member-table" border=1  width=800>
+  <tr align=center>
+  <td> rownum </td><td> rnum </td><td> 이름 </td>
+  <td> 내용 </td><td> 나이 </td><td> 날짜 </td></tr>
+  
+  <tr th:each="m, mStat:${li}" align="center">
+  <td th:text="${m.rownum}" />
+  <td th:text="${m.rnum}" />
+  <td th:text="${m.name}" />
+  <td th:text="${m.age}" />
+  <td th:text="${m.memo}" />
+  <td th:text="${m.regdate}" />
+  </table>
+   
+ 	<form action="/guest/Glist">
+     <select name=ch1>
+       <option value="name"> name </option>
+       <option value="memo"> memo </option>
+     </select>
+     <input type=text name=ch2>
+     <input type=submit value="검색하기">
+     </form>
+  
+   <div>
+   <a th:href="@{/guest/Glist(start=1, ch1=${ch1}, ch2=${ch2})}" th:text="'처음 페이지'"></a>
+   
+   <th:block th:if="${listStartPage > pageListSize}">
+   <a th:href="@{/guest/Glist(start=${start - pageListSize}, ch1=${ch1}, ch2=${ch2})}" th:text="'이전 10 페이지'"></a>
+   </th:block>
+
+   <th:block th:if="${listStartPage <= pageListSize}">
+   <span>이전 10 페이지</span>
+   </th:block>
+   
+   <th:block th:each="i : ${#numbers.sequence(listStartPage, listEndPage)}">
+     <th:block th:with="start=${(i-1) * pageSize +1}">
+   	  <th:block th:if="${i <= totalPage}">
+   <a th:href="@{/guest/Glist(start=${start}, ch1=${ch1}, ch2=${ch2})}" th:text="[+ ${i} + ]"></a>
+      </th:block>
+     </th:block>
+   </th:block>
+   
+   <!-- 다음 10 페이지 링크 -->
+   <th:block th:if="${listEndPage < totalPage}"
+   			th:with="start=${listEndPage * pageSize + 1}">
+   <a th:href="@{/guest/Glist(start=${start}, ch1=${ch1}, ch2=${ch2})}" th:text="'다음 10 페이지'"></a>
+   </th:block>
+
+   <th:block th:if="${listEndPage >= totalPage}"> 다음10페이지 </th:block>
+
+   <!-- 마지막 페이지 링크 -->
+   <th:block th:with="endPage=${lastPage}">
+   <a th:href="@{/guest/Glist(start=${endPage}, ch1=${ch1}, ch2=${ch2})}" th:text="'마지막 페이지'"></a>
+   </th:block>
+ </div>
+
+  </div>
+<br> 
+</section>
+<div  th:replace="~{include/bottom::footer}"></div>
+</body>
+</html>

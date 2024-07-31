@@ -1,0 +1,90 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원상세보기</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff5f7; /* 밝은 배경색 */
+        }
+
+        .member-table {
+            border-collapse: collapse; /* 테두리 겹침 제거 */
+            width: 700px;
+            margin: auto; /* 중앙 정렬 */
+            background: linear-gradient(135deg, #ffe4e6, #ffcccc); /* 밝은 테이블 배경 */
+            border-radius: 8px; /* 모서리 둥글게 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+        }
+
+        .member-table th, .member-table td {
+            padding: 10px; /* 패딩 */
+            text-align: center; /* 가운데 정렬 */
+            border: 1px solid #f1a7b7; /* 밝은 테두리 색상 */
+        }
+
+        .member-table th {
+            background: linear-gradient(135deg, #ff6f8e, #ff9cb2); /* 밝은 헤더 색상 */
+            color: #ffffff; /* 헤더 글자색 */
+            font-weight: bold; /* 두꺼운 글자 */
+        }
+
+        .member-table tr:nth-child(even) {
+            background: #ffe4e6; /* 짝수 행 밝은 배경색 */
+        }
+
+        .member-table tr:hover {
+            background: #ffb3b3; /* 마우스 오버 밝은 색상 */
+        }
+    </style>
+</head>
+
+<script th:inline="javascript">
+function  delK(k){
+  var idx = `[[${m.idx}]]`
+  alert("k:" + k);
+  location.href="/board/delete?idx=" + k ;
+}
+</script>
+
+<body>
+<div  th:replace="~{include/top}"></div>
+<section>
+<br>
+  <div align="center"><h2> board상세조회 </h2></div> 
+  <div align="center"> 
+  
+  <form action="/board/update">
+  <table Class="member-table" border=1  width=500>
+  <tr align=center>
+
+  <tr>
+  <td th:text="이름" width="80"> </td>
+  <td><input name="name" type="text" th:value="${m.name}"> </td>
+  </tr>
+  <tr>
+  <td th:text="나이" width="80"> </td>
+  <td><input name="age" type="text" th:value="${m.age}"> </td>
+  </tr>
+  <tr>
+  <tr>
+  <td th:text="내용" width="80"> </td>
+  <td><input name="etc" type="text" th:value="${m.etc}" size=30> </td>
+  </tr>
+  <tr>
+  <td th:text="날짜" width="80"> </td>
+  <td><input name="regdate" type="text" th:value="${m.regdate}"> </td>
+  </tr>
+   <td colspan="4" align="center">
+     <input type="submit" value="수정하기" >
+     <input type="button" value="삭제하기" th:onClick="delK([[${m.idx}]])" />
+     </td>
+  </table>
+  </form>
+  </div> 
+  <a th:href="@{/board/getBoardList}"> board목록 </a> &emsp;&emsp;
+  <a th:href="@{/board/form}"> board등록 </a>
+<br> 
+</section>
+<div  th:replace="~{include/bottom::footer}"></div>
+</body>

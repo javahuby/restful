@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>board등록</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <style>
+body {
+    background-color: #fafafa; /* 연한 회색 배경 */
+    font-family: Arial, sans-serif;
+}
+
+.member-table {
+    background: #ffdbe6; /* 로즈골드 배경 */
+    border: 1px solid #e0c1c8; /* 연한 핑크색 테두리 */
+    border-radius: 8px; /* 둥근 테두리 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 연한 그림자 */
+}
+
+.member-table th, .member-table td {
+    padding: 12px; /* 패딩 */
+    text-align: center; /* 가운데 정렬 */
+    color: #865560; /* 진한 핑크색 글자 */
+}
+
+.member-table th {
+    background-color: #ffd9e6; /* 연한 로즈골드 배경 */
+    font-weight: bold; /* 굵은 글자 */
+}
+
+.member-table td {
+    border-bottom: 1px solid #e0c1c8; /* 연한 핑크색 테두리 아래 경계선 */
+}
+
+.member-table tr:nth-child(even) {
+    background-color: #ffe6f0; /* 연한 로즈골드 배경 */
+}
+
+.member-table tr:hover {
+    background-color: #ffcce0; /* 더 연한 로즈골드 배경 */
+}
+    </style>
+</head>
+
+<body>
+<div  th:replace="~{include/top}"></div>
+<section>
+<br>
+  <div align="center"><h2> 방명록보기(150) </h2></div> 
+  <div align="center"> 
+  
+  <form action="/guest/Gform" method="post">
+  <table Class="member-table" border=1  width=500>
+  <tr align=center>
+  </tr>
+  <tr>
+  <td> 이름 </td>
+  <td><input name="name" type="text" size=30> </td>
+  </tr>
+  <tr>
+  <tr>
+  <td> 나이 </td>
+  <td><input name="age" type="text" size=30> </td>
+  </tr>
+  <tr>
+  <td> 내용 </td>
+  <td><textarea name="memo" cols=30 rows=4></textarea> </td>
+  </tr>
+  <tr>
+  <tr>
+   <td colspan="2" align="center">
+     <input type="submit" value="방명록등록" >
+     </td>
+  </tr>
+  </table>
+  </form>
+  </div> 
+<br> 
+</section>
+<div  th:replace="~{include/bottom::footer}"></div>
+</body>
