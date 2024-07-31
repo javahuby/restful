@@ -1,15 +1,15 @@
 <table border="1">
-    <tr><td colspan="2">
+<tr>
+    <td colspan="2">
     1. 작성자 : omj <br>
     2. 용도 : restful API 서버와 클라이언트 <br>
     3. 내용 : 방명록 페이지 나누기 <br>
-    </td></tr>
-
+    </td>
+</tr>
     <tr><td colspan="2"> server test img ( port number : 8777 ) </td></tr>
     <tr><td colspan="2">
      <img src="https://cafeptthumb-phinf.pstatic.net/MjAyNDA3MzFfMjgg/MDAxNzIyMzg4NzgwMTgy.8skVERu5mhEO944yyLh55Q_5Z3nCd6PWWZ9Uy-OP2fIg.kGau_hluerTNCtvgPjH1sUYDFv4do1zog_oPfTWXUmIg.PNG/%EC%BA%A1%EC%B2%98.PNG?type=w1600" />
     </td></tr>
-    
     <tr><td colspan="2"> client test img ( port number : 8895 ) </td></tr>
     <tr>
     <td>
